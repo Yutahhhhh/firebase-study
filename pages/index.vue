@@ -12,33 +12,28 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
-
+<script setup lang="ts">
 type ColorType = {
   "--color-h1": string
   "--color-h2": string
   "--color-h3": string
   "--color-back": string
 }
-
-@Component
-export default class Index extends Vue {
-  colorSwitch: 'cool' | 'cute' = 'cool'
-  coolColor: ColorType = {
-    "--color-h1": '#08ffc8',
-    "--color-h2": '#fff7f7',
-    "--color-h3": '#dadada',
-    "--color-back": '#204969'
-  }
-  cuteColor: ColorType = {
-    "--color-h1": '#ffb6b9',
-    "--color-h2": '#fae3d9',
-    "--color-h3": '#bbded6',
-    "--color-back": '#8ac6d1'
-  }
-  richText: string = `<h1>h1タグだよ</h1><p>こんにちは、h1タグです。</p><h2>h2タグだよ</h2><p>こんにちは、h2タグです。</p><h3>h3タグだよ</h3><p>こんにちは、h3タグです。</p>`
+const coolColor: ColorType = {
+  "--color-h1": '#08ffc8',
+  "--color-h2": '#fff7f7',
+  "--color-h3": '#dadada',
+  "--color-back": '#204969'
 }
+const cuteColor: ColorType = {
+  "--color-h1": '#ffb6b9',
+  "--color-h2": '#fae3d9',
+  "--color-h3": '#bbded6',
+  "--color-back": '#8ac6d1'
+}
+
+const colorSwitch = ref<'cool' | 'cute'>('cool')
+const richText: string = `<h1>h1タグだよ</h1><p>こんにちは、h1タグです。</p><h2>h2タグだよ</h2><p>こんにちは、h2タグです。</p><h3>h3タグだよ</h3><p>こんにちは、h3タグです。</p>`
 </script>
 
 <style lang="sass">
