@@ -1,11 +1,26 @@
 <template>
   <div>
     <v-container>
-      <v-card :style="colorSwitch === 'cool' ? coolColor : cuteColor" class="color-pallet">
-        <v-card-text v-html="richText"/>
+      <v-card
+        :style="colorSwitch === 'cool' ? coolColor : cuteColor"
+        class="color-pallet"
+      >
+        <v-card-text>
+          <div v-html="richText" />
+        </v-card-text>
         <v-card-actions>
-          <v-btn color="#08ffc8" @click="colorSwitch='cool'">クール系</v-btn>
-          <v-btn color="#ffb6b9" @click="colorSwitch='cute'">かわいい系</v-btn>
+          <v-btn
+            color="#08ffc8"
+            @click="colorSwitch='cool'"
+          >
+            クール系
+          </v-btn>
+          <v-btn
+            color="#ffb6b9"
+            @click="colorSwitch='cute'"
+          >
+            かわいい系
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-container>
@@ -33,7 +48,7 @@ const cuteColor: ColorType = {
 }
 
 const colorSwitch = ref<'cool' | 'cute'>('cool')
-const richText: string = `<h1>h1タグだよ</h1><p>こんにちは、h1タグです。</p><h2>h2タグだよ</h2><p>こんにちは、h2タグです。</p><h3>h3タグだよ</h3><p>こんにちは、h3タグです。</p>`
+const richText = `<h1>h1タグだよ</h1><p>こんにちは、h1タグです。</p><h2>h2タグだよ</h2><p>こんにちは、h2タグです。</p><h3>h3タグだよ</h3><p>こんにちは、h3タグです。</p>`
 </script>
 
 <style lang="sass">
