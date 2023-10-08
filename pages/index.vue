@@ -10,20 +10,27 @@
             class="color-pallet h-100"
           >
             <v-card-text>
-              <div v-html="richText" />
+              <!-- <div v-html="xssText" /> # サニタイズしないとアラートが表示される -->
+              <div v-html="sanitizeHtml(switchMode === 'xss' ? xssText : richText, sanitizeOptions)" />
             </v-card-text>
             <v-card-actions>
               <v-btn
                 color="#08ffc8"
-                @click="switchColor='cool'"
+                @click="switchMode='cool'"
               >
                 クール系
               </v-btn>
               <v-btn
                 color="#ffb6b9"
-                @click="switchColor='cute'"
+                @click="switchMode='cute'"
               >
                 かわいい系
+              </v-btn>
+              <v-btn
+                color="red"
+                @click="switchMode='xss'"
+              >
+                XSS攻撃
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -47,13 +54,13 @@
 </template>
 
 <script setup lang="ts">
+import sanitizeHtml from 'sanitize-html';
 type ColorType = {
   h1: string
   h2: string
   h3: string
   back: string
 }
-
 
 const coolColor: ColorType = {
   h1: '#08ffc8',
@@ -69,7 +76,14 @@ const cuteColor: ColorType = {
   back: '#8ac6d1'
 }
 
-const switchColor = ref<'cool' | 'cute'>('cool')
+const switchMode = ref<'cool' | 'cute' | 'xss'>('cool')
+
+const sanitizeOptions = {
+  allowedTags: ['h1', 'h2', 'h3', 'p', 'img'],
+  allowedAttributes: {
+    'img': ['src', 'alt']  // デフォルトでもonerrorなどのイベントハンドラは許可していないが、明示的に。
+  }
+}
 
 const richText = `
   <h1>ペットの冒険</h1>
@@ -85,24 +99,28 @@ const richText = `
   <p>冒険は楽しい思い出と共に終わったんだけれど、ミケとポチはいつも一緒にいるから、これからもたくさんの冒険が待っていると思うんだ。ペットとの冒険は最高だね！</p>
   <p>それではまたね！</p>
 `
+
+// MEMO: <img src="存在しない画像">のようにサニタイズされる。
+const xssText = `<p>攻撃を仕掛けるテキスト</p><img src="存在しない画像" onerror="alert('XSS攻撃!')" />` 
 </script>
+
 
 <style lang="sass">
 .color-pallet
   h1
-    background: v-bind("switchColor === 'cool' ? coolColor.h1 : cuteColor.h1")
+    background: v-bind("switchMode === 'cool' ? coolColor.h1 : cuteColor.h1")
     font-size: 3rem
     margin: 80px 0
   h2
-    background: v-bind("switchColor === 'cool' ? coolColor.h2 : cuteColor.h2")
+    background: v-bind("switchMode === 'cool' ? coolColor.h2 : cuteColor.h2")
     font-size: 2rem
     margin: 50px 0
   h3
-    background: v-bind("switchColor === 'cool' ? coolColor.h3 : cuteColor.h3")
+    background: v-bind("switchMode === 'cool' ? coolColor.h3 : cuteColor.h3")
     font-size: 1.5rem
     margin: 40px 0
   p
-    color: v-bind("switchColor === 'cool' ? coolColor.back : cuteColor.back")
+    color: v-bind("switchMode === 'cool' ? coolColor.back : cuteColor.back")
 
 .sidebar-sticky
   position: sticky
