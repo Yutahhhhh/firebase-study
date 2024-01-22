@@ -14,11 +14,13 @@
             :to="p.to"
             color="primary"
           >
-            <template v-slot:prepend>
-              <v-icon :icon="p.icon"></v-icon>
+            <template #prepend>
+              <v-icon :icon="p.icon" />
             </template>
 
-            <v-list-item-title v-text="p.text"></v-list-item-title>
+            <v-list-item-title>
+              {{ p.text }}
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-card>

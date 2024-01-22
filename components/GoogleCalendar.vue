@@ -16,14 +16,15 @@ const display = ref(useDisplay())
 onMounted(() => {
   if (!calendarRef.value) return
 
-  const { apiKey } = useRuntimeConfig().public
+  const { CALENDAR_ID } = useRuntimeConfig().public
+  console.log(CALENDAR_ID)
   const calendar = new Calendar(calendarRef.value, {
     locale: 'ja',
     plugins: [dayGridPlugin, listPlugin, interactionPlugin, googleCalendarPlugin],
     initialView: display.value.xs ? 'listMonth' : 'dayGridMonth',
     eventSources: [
       {
-        googleCalendarApiKey: apiKey,
+        googleCalendarApiKey: CALENDAR_ID,
         googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com'
       }
     ]
