@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  firebase:
+    container_name: study-firebase
+    build:
+      context: .
+      dockerfile: ./containers/Dockerfile
+    volumes:
+      - ./package.json:/usr/src/app/package.json
+      - ./yarn.lock:/usr/src/app/yarn.lock
+      - ./node_modules/:/usr/src/app/node_modules
+      - ./.output/:/usr/src/app/.output
+      - ./.firebaserc:/usr/src/app/.firebaserc
+      - ./firebase.json:/usr/src/app/firebase.json
+      - ./firestore.indexes.json:/usr/src/app/firestore.indexes.json
+      - ./firestore.rules:/usr/src/app/firestore.rules
+      - ./storage.rules:/usr/src/app/storage.rules
+      - ./containers/:/usr/src/app/containers
+      - ./containers/bin/:/root/.cache:cached
+      - ./containers/config/:/root/.config:cached
+    ports:
+      - 9099:9099 # Firebase Authentication
+      - 8080:8080 # Cloud Firestore
+      - 5000:5000 # Firebase Hosting
+      - 9199:9199 # Cloud Storage
+      - 4000:4000 # Emulator Suite UI
+      - 9150:9150 # Firestore Emulator UI websocket
+    working_dir: /usr/src/app
+    command: ./containers/start_firebase.sh ${EXPORT_INTERVAL}
+    tty: true
