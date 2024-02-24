@@ -1,4 +1,23 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "extends": "./.nuxt/tsconfig.json",
+  "esModuleInterop": true,
+  "noUnusedLocals": true,
+
+  "compilerOptions": {
+    "typeRoots": [
+      "./.nuxt",
+      "./types",
+      "./node_modules/@types"
+    ],
+
+    "types": [
+      "node"
+    ]
+  },
+
+  "include": [
+    "./.nuxt/**/*",
+    "./**/*"
+  ]
 }
