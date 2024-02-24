@@ -12,7 +12,7 @@ export namespace FirestoreUtil {
   export abstract class Model<T> {
     abstract get modelName(): string
     abstract docToModel(doc: QueryDocumentSnapshot | DocumentData): T
-
+    
     get db(): Firestore {
       return useNuxtApp().$db
     }
