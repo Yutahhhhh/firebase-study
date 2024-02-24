@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>vegetable: {{ path }}</span>
+    <span>vegetable: {{ target.name }}</span>
     <v-btn @click="throwError">
       擬似エラー
     </v-btn>
@@ -8,15 +8,13 @@
 </template>
 
 <script setup lang="ts">
-type PathType = 'cabbage' | 'pumpkin' | 'carrot'
-const vegetables: PathType[] = [
-  'cabbage',
-  'pumpkin',
-  'carrot'
-]
-const path = useRoute().params._vegetable as PathType
+import { VegetableUtil } from '~/utils/firestore';
+const { $firebase } = useNuxtApp()
+const vegetableUtil = new VegetableUtil($firebase)
+const path = useRoute().params._vegetable as string
+const target = await vegetableUtil.getByName(path)
 
-if (!vegetables.includes(path)) {
+if (!target) {
   throw createError({
     statusCode: 404,
     message: 'Not Found',
