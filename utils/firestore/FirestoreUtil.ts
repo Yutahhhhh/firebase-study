@@ -1,6 +1,4 @@
-import firebase from 'firebase/app'
 import {
-  getFirestore,
   Firestore,
   QueryDocumentSnapshot,
   DocumentData,
@@ -14,14 +12,9 @@ export namespace FirestoreUtil {
   export abstract class Model<T> {
     abstract get modelName(): string
     abstract docToModel(doc: QueryDocumentSnapshot | DocumentData): T
-    $firebase: firebase.FirebaseApp
-
-    constructor($firebase: firebase.FirebaseApp) {
-      this.$firebase = $firebase
-    }
-
+    
     get db(): Firestore {
-      return getFirestore()
+      return useNuxtApp().$db
     }
 
     getCollectionRef(): CollectionReference {

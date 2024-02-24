@@ -9,8 +9,7 @@
 
 <script setup lang="ts">
 import { VegetableUtil } from '~/utils/firestore';
-const { $firebase } = useNuxtApp()
-const vegetableUtil = new VegetableUtil($firebase)
+const vegetableUtil = new VegetableUtil()
 const path = useRoute().params._vegetable as string
 const target = await vegetableUtil.getByName(path)
 
