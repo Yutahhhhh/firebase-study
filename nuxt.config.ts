@@ -10,6 +10,7 @@ export default defineNuxtConfig({
       FB_MESSAGING_SENDER_ID: '',
       FB_APP_ID: '',
       CALENDAR_ID: '',
+      USE_EMULATOR: ''
     }
   },
   app: {
