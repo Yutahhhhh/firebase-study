@@ -15,7 +15,11 @@ jobs:
         run: |
           touch .env
           echo "${{ secrets.ENV_PRD }}" > .env
-      - run: yarn install && yarn generate
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install --frozen-lockfile && yarn generate
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
