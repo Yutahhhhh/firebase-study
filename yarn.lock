@@ -8184,9 +8184,9 @@ nuxt@^3.5.1:
     vue-router "^4.2.1"
 
 nypm@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/nypm/-/nypm-0.2.0.tgz#9161970ae0f21a8acfbdce6ae6c7dc042d0f4e79"
-  integrity sha512-auBv78LkHyU9TywBE91N+RTkanVyFLsVayZaHW+YYvJDJ3u2PCwLaYB3eecPQD9tgCIXGuH871HlHTdKSf6rtw==
+  version "0.2.2"
+  resolved "https://registry.npmjs.org/nypm/-/nypm-0.2.2.tgz#6127d0dcf584c5487249b4b3216b3c137be31e22"
+  integrity sha512-O7bumfWgUXlJefT1Y41SF4vsCvzeUYmnKABuOKStheCObzrkWPDmqJc+RJVU+57oFu9bITcrUq8sKFIHgjCnTg==
   dependencies:
     execa "^7.1.1"
 

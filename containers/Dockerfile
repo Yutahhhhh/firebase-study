@@ -4,8 +4,8 @@ RUN apt update && \
     apt install -y ca-certificates-java && \
     update-ca-certificates -f && \
     apt install -y curl openjdk-17-jdk && \
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt install -y nodejs imagemagick
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt install -y nodejs=22.23.4-1nodesource1 imagemagick
 
 RUN npm install -g yarn firebase-tools
 
